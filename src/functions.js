@@ -1,7 +1,13 @@
 import contains from './contains';
 
 export function add(a, b) {
-  return Number(a) + Number(b);
+  var as = typeof a === 'number';
+  var bs = typeof b === 'number';
+  if (as && bs) {
+    return Number(a) + Number(b);
+  }
+
+  return '' + a + b;
 }
 
 export function sub(a, b) {
@@ -251,7 +257,8 @@ export function setVar(name, value, variables) {
 }
 
 export function arrayIndex(array, index) {
-  return array[index | 0];
+  var i = typeof index === 'string' ? index : (index | 0);
+  return array[i];
 }
 
 export function max(array) {
@@ -326,7 +333,7 @@ export function sign(x) {
   return ((x > 0) - (x < 0)) || +x;
 }
 
-var ONE_THIRD = 1/3;
+var ONE_THIRD = 1 / 3;
 export function cbrt(x) {
   return x < 0 ? -Math.pow(-x, ONE_THIRD) : Math.pow(x, ONE_THIRD);
 }

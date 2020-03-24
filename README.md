@@ -1,9 +1,29 @@
 JavaScript Expression Evaluator
 ===============================
 
-[![npm](https://img.shields.io/npm/v/expr-eval.svg?maxAge=3600)](https://www.npmjs.com/package/expr-eval)
-[![CDNJS version](https://img.shields.io/cdnjs/v/expr-eval.svg?maxAge=3600)](https://cdnjs.com/libraries/expr-eval)
-[![Build Status](https://travis-ci.org/silentmatt/expr-eval.svg?branch=master)](https://travis-ci.org/silentmatt/expr-eval)
+## 使用说明
+本仓库fork于`https://github.com/silentmatt/expr-eval`;
+
+对`expr-eval`项目进行的两处修改
+
+### 支持字符串拼接 
+```
+const expression = `a + b`;
+Parser.evaluate(str, { a: "12", b: "xxx" }) // 12xxx
+```
+
+### 支持[]取对象值
+```
+const expression = `a["f-1"] + b`;
+Parser.evaluate(str, { a: {"f-1": 1 }, b: 20 }) // 21
+```
+
+
+注意：不支持toJSFunction的取值
+```
+const parser = new Parser();
+parser.parse('a["f-1"]').toJSFunction('a')({ 'f-1': 42 }); // undefined
+```
 
 Description
 -------------------------------------
